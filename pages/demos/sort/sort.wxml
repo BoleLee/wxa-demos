@@ -1,0 +1,46 @@
+<view class="sort-container">
+  <view class="touch-area" style="height:{{scrollPosition.scrollViewHeight-scrollPosition.top}}px;" 
+        catchtouchstart="draggleTouch" catchtouchmove="draggleTouch" catchtouchend="draggleTouch"></view>
+
+  <movable-area class="moveable-area {{movableViewPosition.className}}"
+          style="height: {{scrollPosition.scrollViewHeight-scrollPosition.top}}px;">
+    <movable-view style="height: {{scrollPosition.everyOptionCell}}px; width: 100%; background-color: #fff;"
+            direction="vertical" x="{{movableViewPosition.x}}" y="{{movableViewPosition.y}}"
+            inertia="false" damping="9999" friction="9999">
+      <view class="weui-cells weui-cells_after-title list-area">
+        <view class="weui-cell list-item">
+          <view class="weui-cell__bd">
+            <view class="name">{{movableViewPosition.data.title}}</view>
+          </view>
+          <view class="weui-cell__ft">
+            <view class="iconfont icon-more"></view>
+          </view>
+        </view>
+      </view>
+    </movable-view>
+  </movable-area>
+
+  <scroll-view class="scroll-view" scroll-y="{{scrollPosition.scrollY}}"
+         style="height: {{scrollPosition.scrollViewHeight}}px;" bindscroll="bindscroll">
+    <view class="weui-cells__title title">拖曳调整卡片顺序</view>
+    <view class="weui-cells weui-cells_after-title list-area">
+      <block wx:for="{{optionsListData}}" wx:key="id">
+        <view class="weui-cell list-item">
+          <view class="weui-cell__bd">
+            <view class="name">{{item.title}}</view>
+          </view>
+          <view class="weui-cell__ft">
+            <view class="iconfont icon-more"></view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="bottom-btn-area">
+  <view class="weui-flex">
+    <button bindtap="cancelSort" type="primary" class="weui-flex__item" hover-class="button-hover">取消</button>
+    <button bindtap="updateSort" type="primary" class="weui-flex__item" hover-class="button-hover">完成</button>
+  </view>
+</view>

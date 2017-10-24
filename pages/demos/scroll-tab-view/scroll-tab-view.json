@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "scroll-tab-view",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#ffffff"
+}

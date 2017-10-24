@@ -1,0 +1,29 @@
+{
+  "pages":[
+    "pages/demos/index/index",
+    "pages/demos/scroll-tab-view/scroll-tab-view",
+    "pages/demos/sort/sort",
+
+    "pages/index/index",
+    "pages/logs/logs"
+
+  ],
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#43e474",
+    "backgroundColor": "#ffffff",
+    "list": [{
+      "pagePath": "pages/demos/index/index",
+      "text": "Demos"
+    }, {
+      "pagePath": "pages/index/index",
+      "text": "Me"
+    }]
+  },
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

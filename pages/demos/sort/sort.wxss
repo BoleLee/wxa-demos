@@ -1,0 +1,50 @@
+@import "../../../styles/bottom-btn-area.wxss";
+
+
+/* 
+ * sort-container
+ */
+.sort-container {
+  position: relative; 
+  z-index: 199;
+}
+.sort-container .touch-area {
+  z-index: 200; 
+  width: 100px;
+  position: absolute;
+  top: 32px;
+  right:0;
+}
+.sort-container .moveable-area { 
+  width: 100%; 
+  position: absolute;
+  top: 32px;
+  left: 0; 
+  z-index: 100;
+}
+.sort-container .moveable-area .list-area { 
+  box-shadow: 0 0 12px rgba(0,0,0,.2)
+}
+.dragSelected { 
+  background-color: #ccc;
+}
+.sort-container .scroll-view { 
+  background-color: #ddd;
+}
+.sort-container .scroll-view .title {
+  margin:0;
+  height:32px;
+  line-height:32px;
+}
+.none {
+  display: none;
+}
+
+/* list item */
+.list-area {
+  background-color: #fff;
+}
+.list-area .list-item .name { 
+  font-size: 17px; 
+  line-height: 1.2;
+}

@@ -1,0 +1,26 @@
+<view class="stv-container">
+  <scroll-view scroll-x="true" scroll-left="{{tabBarScrollLeft}}" class="navbar">
+    <block wx:for="{{tabs}}" wx:key="{{item.name}}">
+      <view data-index="{{index}}" bindtap="handlerTabTap" class="navbar__item {{activeTab == index ? 'navbar__item-active' : ''}}">
+        <view class="navbar__item-title">
+          <view> {{ item.name }} </view>
+        </view>
+      </view>
+    </block>
+    <view style="margin-left: {{navSliderLeft}}px" class="navbar__slider withAnimate"></view>
+  </scroll-view>
+
+  <swiper current="{{activeTab}}" bindchange="swiperChange" style="height:{{swiperHeight}}px;">
+    <block wx:for="{{tabs}}" wx:key="{{item.content}}">
+      <swiper-item>
+        <scroll-view scroll-y="true" style="height:100%;">
+          <view class="content">{{ item.content }}</view>
+        </scroll-view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+
+
+

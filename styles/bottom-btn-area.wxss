@@ -1,0 +1,35 @@
+/* 底部按钮区域 */
+.bottom-btn-area {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+.bottom-btn-area .tip-text {
+  color: #888;
+  font-size: 28rpx;
+  text-align: center;
+  margin-bottom: 20rpx;
+}
+.bottom-btn-area button {
+  border-radius: 0;
+}
+.bottom-btn-area button::after {
+  border: none;
+}
+.bottom-btn-area .weui-flex {
+  padding: 10rpx 0;
+  background-color: #4979dd;
+}
+.bottom-btn-area .weui-flex button {
+  padding-left:20rpx;
+  padding-right:20rpx;
+  line-height: 2;
+  border-right: 1rpx solid #fff;
+}
+.bottom-btn-area .weui-flex button:last-child {
+  border-right: none;
+}
+
+
