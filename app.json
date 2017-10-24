@@ -1,7 +1,7 @@
 {
   "pages":[
     "pages/demos/index/index",
-    "pages/demos/scroll-tab-view/scroll-tab-view",
+    "pages/demos/scrollable-tab-view/scrollable-tab-view",
     "pages/demos/sort/sort",
 
     "pages/index/index",

@@ -1,7 +1,7 @@
 Page({
   data: {
     lists: [{
-      url: '../scroll-tab-view/scroll-tab-view',
+      url: '../scrollable-tab-view/scrollable-tab-view',
       name: 'scroll-tab-view'
     }, {
       url: '../sort/sort',
