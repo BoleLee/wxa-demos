@@ -4,7 +4,7 @@
 
 - **导航可滚动的tabView:** scrollable-tab-view, 若导航tab较多，超出屏幕宽度，则可滚动显示
 
-  [简要说明](https://github.com/BoleLee/wxa-demos/docs/scrollable-tab-view.md)
+  [简要说明](docs/scrollable-tab-view.md)
 
   参考自：[此文章](http://www.henkuai.com/thread-30108-1-1.html)
 
