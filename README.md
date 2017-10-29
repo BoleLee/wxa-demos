@@ -2,15 +2,11 @@
 
 将做小程序过程中用到的一些例子，比如可滑动的tab-view，列表排序，图片截取等集中到一起，方便查找。
 
-- **导航可滚动的tabView:** scrollable-tab-view, 若导航tab较多，超出屏幕宽度，则可滚动显示
-
-  [简要说明](docs/scrollable-tab-view.md)
+- **导航可滚动的tabView:** [scrollable-tab-view](docs/scrollable-tab-view.md), 若导航tab较多，超出屏幕宽度，则可滚动显示
 
   参考自：[此文章](http://www.henkuai.com/thread-30108-1-1.html)
 
-- **拖动排序: sort**
-
-  [简要说明](https://github.com/BoleLee/wxa-demos/docs/sort.md)
+- **拖动排序:** [sort](docs/sort.md)
 
   改写自：[kevenfeng/DragSort](https://github.com/kevenfeng/DragSort)，根据对其代码的理解，做了一点简化，方便应用
 
