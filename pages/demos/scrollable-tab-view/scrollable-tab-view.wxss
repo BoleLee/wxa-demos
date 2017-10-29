@@ -1,7 +1,7 @@
 /* 导航tabs */
 .navbar {
   width: 100%;
-  height: 104rpx;
+  height: 74rpx; /* 导航高度 */
   white-space: nowrap; /* important: scroll-view scroll-x */
   background-color: #fff;
   border-bottom: 1rpx solid #eee;
@@ -26,7 +26,7 @@
   height: 6rpx;
   background-color: #4374e4;
   position: absolute;
-  top: 98rpx;
+  top: 68rpx; /* 指示条位置 */
   left: 0;
 }
 

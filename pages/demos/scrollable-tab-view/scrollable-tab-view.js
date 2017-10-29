@@ -1,26 +1,29 @@
 Page({
   data: {
     tabs: [{
-      name: '周一',
+      name: '导航一',
       content: 'tab1'
     }, {
-      name: '周二',
+      name: '导航二',
       content: 'tab2'
     }, {
-      name: '周三',
+      name: '导航三',
       content: 'tab3'
     }, {
-      name: '周四',
+      name: '导航四',
       content: 'tab4'
     }, {
-      name: '周五',
+      name: '导航五',
       content: 'tab5'
     }, {
-      name: '周六',
+      name: '导航六',
       content: 'tab6'
     }, {
-      name: '周日',
+      name: '导航七',
       content: 'tab7'
+    }, {
+      name: '导航八',
+      content: 'tab8'
     }],
 
     activeTab: 0,
@@ -29,7 +32,7 @@ Page({
     rpxRatio: 2,
     tabWidth: 108, // rpx
     winWidth: 750, // rpx
-    navHeight: 104, // rpx
+    navHeight: 74, // rpx
     swiperHeight: 507 // px
   },
 
@@ -62,12 +65,12 @@ Page({
 
   // 监测更新tab-bar的滚动位置
   updateTabBarScroll() {
-    let { activeTab, tabWidth, winWidth, rpxRatio } = this.data;
+    let { activeTab, tabWidth, winWidth, rpxRatio, tabs } = this.data;
     var tabOffset = tabWidth*(activeTab+1);
     var result = 0;
     
     var minOffset = winWidth-tabWidth;
-    var maxScroll = tabWidth*7 - winWidth;
+    var maxScroll = tabWidth*tabs.length - winWidth;
 
     if(tabOffset <= minOffset) {
       result = 0;
@@ -84,12 +87,14 @@ Page({
     })
   },
   _updateSelectedPage(page) {
+    var that = this;
     var { tabWidth, rpxRatio } = this.data;
     this.setData({
       activeTab: page,
       navSliderLeft: Math.round(tabWidth*page/rpxRatio)
+    }, function() {
+      that.updateTabBarScroll();
     })
-    this.updateTabBarScroll();
   },
   handlerTabTap(e) {
     this._updateSelectedPage(e.currentTarget.dataset.index);
