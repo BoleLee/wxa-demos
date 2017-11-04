@@ -1,0 +1,8 @@
+@import './styles/common.wxss';
+@import './styles/animate.wxss';
+
+@import './styles/backdrop.wxss';
+@import './styles/toast.wxss';
+@import './styles/toptips.wxss';
+@import './styles/xnumber.wxss';
+@import './barrage/barrage.wxss';

@@ -1,0 +1,68 @@
+view {
+  box-sizing: border-box;
+ }
+
+.barrage-swipe {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.barrage-swipe-items-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+.barrage-swipe-item {
+  position: absolute;
+  /* display: none; */
+  width: 100%;
+  height: 100%;
+}
+.barrage-swipe-item.is-active {
+  /* display: block;
+  transform: none; */
+}
+
+/* animation */
+@keyframes swipeItemFadeIn {
+  0% { opacity: 0; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+} 
+@keyframes swipeItemFadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 0; }
+  100% { opacity: 0;  }
+} 
+
+/* barrage style */
+.vertical-center {
+  display: flex; 
+  height: 100%; 
+  align-items: center;
+}
+.barrage-item-wrapper {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 28rpx;
+  max-width: 100%;
+  height: 56rpx;
+  padding-right: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.barrage-item-wrapper .avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-left: 4rpx;
+  margin-right: 4rpx;
+}
+.barrage-item-wrapper .barrage-content {
+  font-size: 28rpx;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
