@@ -4,6 +4,8 @@
 @import "styles/weui.wxss";
 /* iconfont */
 @import "styles/iconfont.wxss";
+/* wux components */
+@import "components/wux.wxss";
 
 /* modify weui button */
 .primary {

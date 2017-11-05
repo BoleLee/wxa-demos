@@ -1,0 +1,15 @@
+.container {
+  width: 100vw;
+  height: 400rpx;
+  background-color: #eee;
+  position: relative;
+}
+.barrage-area {
+  position: absolute;
+  top: 200rpx;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+  height: 96rpx;
+  overflow: hidden;
+}

@@ -6,6 +6,9 @@ Page({
     }, {
       url: '../sort/sort',
       name: 'sort 排序'
+    }, {
+      url: '../barrage/barrage',
+      name: 'barrage'
     }]
   }
 })
