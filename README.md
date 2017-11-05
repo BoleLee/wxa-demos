@@ -12,6 +12,8 @@
 
 - **图片裁剪** 使用 [we-cropper](https://github.com/we-plugin/we-cropper), 其项目中有完整的例子及[文档](https://we-plugin.github.io/we-cropper/#/)；
 
+- **滚动评论:** [barrage](docs/barrage.md)
+
 ## 预览效果 ##
 在微信开发者工具中打开此项目，首页中点击对应例子
 
