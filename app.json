@@ -3,6 +3,7 @@
     "pages/demos/index/index",
     "pages/demos/scrollable-tab-view/scrollable-tab-view",
     "pages/demos/sort/sort",
+    "pages/demos/barrage/barrage",
 
     "pages/index/index",
     "pages/logs/logs"

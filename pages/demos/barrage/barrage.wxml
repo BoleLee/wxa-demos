@@ -1,12 +1,55 @@
-<import src="../../../components/barrage/barrage.wxml" />
+<!-- <import src="../../../components/barrage/barrage.wxml" /> -->
 
+<view class="weui-cells__title">default</view>
 <view class="container">
   <view class="barrage-area">
     <!-- <template is="barrage" data="{{...$wux.barrage.test1}}" /> -->
     <view class="barrage-swipe">
       <view class="barrage-swipe-items-wrap">
         <block wx:for="{{$wux.barrage.test1.comments}}" wx:key="id" wx:for-item="comment">
-          <view class="barrage-swipe-item" animation="{{$wux.barrage.test1.animationData[index]}}">
+          <view class="barrage-swipe-item {{ index === $wux.barrage.test1.index ? 'is-active' : '' }}" animation="{{ $wux.barrage.test1.animationData[index] }}">
+            <view class="vertical-center">
+              <view class="barrage-item-wrapper">
+                <image src="{{comment.avatar_url}}" class="avatar"></image>
+                <view class="barrage-content">{{ comment.content }}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">scroll when one swipe: 暂未想到看起来流畅的方案</view>
+<view class="container">
+  <view class="barrage-area">
+    <!-- <template is="barrage" data="{{...$wux.barrage.test2}}" /> -->
+    <view class="barrage-swipe">
+      <view class="barrage-swipe-items-wrap">
+        <block wx:for="{{$wux.barrage.test2.comments}}" wx:key="id" wx:for-item="comment">
+          <view class="barrage-swipe-item {{ index === $wux.barrage.test2.index ? 'is-active' : '' }}" animation="{{ $wux.barrage.test2.animationData[index] }}">
+            <view class="vertical-center">
+              <view class="barrage-item-wrapper">
+                <image src="{{comment.avatar_url}}" class="avatar"></image>
+                <view class="barrage-content">{{ comment.content }}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title">遍历使用</view>
+<view wx:for="{{ swipeArr }}" wx:key="swipe" wx:for-index="outerIndex" class="container">
+  <view class="barrage-area">
+    <!-- <template is="barrage" data="{{...$wux.barrage['swipe-'+outerIndex]}}" /> -->
+    <view class="barrage-swipe">
+      <view class="barrage-swipe-items-wrap">
+        <block wx:for="{{$wux.barrage['swipe-'+outerIndex].comments}}" wx:key="id" wx:for-item="comment">
+          <view class="barrage-swipe-item" animation="{{ $wux.barrage['swipe-'+outerIndex].animationData[index] }}">
             <view class="vertical-center">
               <view class="barrage-item-wrapper">
                 <image src="{{comment.avatar_url}}" class="avatar"></image>

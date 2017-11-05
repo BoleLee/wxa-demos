@@ -8,21 +8,17 @@ export default {
     return {
       comments: [],
       animationData: [],
-      translateYArr: [],
-      defaultIndex: 0,
       auto: 2000, 
       speed: 1000, 
-      fade: true,
-      continuous: true,
+      circular: true,
+      scrollWhenOne: false,
       ready: false,
+      height: 48,
+      defaultIndex: 0,
       index: 0,
-      dragging: false,
-      animating: false,
       timer: null,
       reInitTimer: null,
-      noDrag: false,
-      isDone: false,
-      height: 48
+      isDone: false
     }
   },
 
@@ -35,62 +31,40 @@ export default {
       data: options,
       methods: {
         translate(index, offset, display, speed, callback) {
-          const barrage = this.getComponentData();
-          var fade = barrage.fade;
-
-          if (speed) {
-            this.page.setData({
-              [`$wux.barrage.${id}.animating`]: true
-            })
-
+          if (speed >= 0) {
             /**
              * 创建一个动画实例
              */
             const animation = wx.createAnimation({
               duration: speed,
               timingFunction: 'ease-in-out',
-              delay: 50
+              delay: 0,
+              transformOrigin: '50% 50%'
             })
 
             var opacity = display ? 1 : 0;
             animation.translateY(offset).opacity(opacity).step();
 
-            this.page.setData({
-              [`$wux.barrage.${id}.animationData[${index}]`]: animation.export()
-            })
-
-            var called = false;
-
-            var transitionEndCallback = () => {
-              if (called) return;
-              called = true;
-              this.page.setData({
-                [`$wux.barrage.${id}.animating`]: true
-              })
-
-              // TODO 取消动画？
-              if (callback) {
-                callback.apply(this, arguments);
-              }
-            };
+            typeof callback == 'function' && callback(animation.export())
           }
         },
         doAnimate(towards) {
           var barrage = this.getComponentData();
-          var prevIndex, nextIndex, currentIndex, pageHeight, offsetTop;
+          var prevIndex, nextIndex;
+          var pageHeight = barrage.height;
           var speed = barrage.speed || 300;
-          var continuous = barrage.continuous;
+          var circular = barrage.circular;
           var total = barrage.comments.length;
-          var index = barrage.index;
+          var currentIndex = barrage.index;
+          var scrollWhenOne = barrage.scrollWhenOne;
+          var that = this;
 
           if (total === 0) return;
-
-          pageHeight = barrage.height;
-          currentIndex = index;
-          prevIndex = index - 1;
-          nextIndex = index + 1;
-          if (continuous) {
-            if (!prevIndex) {
+          
+          if (towards === 'next') {
+            prevIndex = currentIndex - 1;
+            nextIndex = currentIndex + 1;
+            if (prevIndex < 0) {
               prevIndex = total - 1;
             }
             if (nextIndex > total-1) {
@@ -99,42 +73,82 @@ export default {
           }
 
           var newIndex;
-
           if (towards === 'next') {
-            if (index < total - 1) {
-              newIndex = index + 1;
+            if (currentIndex < total - 1) {
+              newIndex = currentIndex + 1;
             }
-            if (continuous && index === total - 1) {
+            if (currentIndex === total - 1) {
               newIndex = 0;
             }
           }
-
-          var callback = () => {
-            if (newIndex !== undefined) {
-              this.page.setData({
-                [`$wux.barrage.${id}.index`]: newIndex
-              })
-            }
-          };
+          this.page.setData({
+            [`$wux.barrage.${id}.index`]: newIndex
+          })
 
           setTimeout(() => {
             this.page.setData({
               [`$wux.barrage.${id}.isDone`]: true
             })
 
-            // TODO items的新位置translate
-            var translateYArr = [];
+            var animationData = [];
             for(var i = 0; i < total; i++) {
               var offset = pageHeight * (i - newIndex);
               var display = i === newIndex ? 1 : 0;
-              this.translate(i, offset, display);
-
-              translateYArr.push(offset);
+              if(circular && newIndex == 0 && i > newIndex) {
+                offset = pageHeight * (i - total - newIndex);
+              }
+              // if(scrollWhenOne && total == 1 && i == newIndex) {
+              //   offset = pageHeight * -1;
+              //   speed = speed / 3;
+              // }
+              this.translate(i, offset, display, speed, function(animation) {
+                animationData.push(animation);
+              });
             }
-            console.log('translating')
 
             this.page.setData({
-              [`$wux.barrage.${id}.translateYArr`]: translateYArr
+              [`$wux.barrage.${id}.animationData`]: animationData
+            }, function() {
+
+              if(circular && towards == 'next') {
+                setTimeout(() => {
+                  for(var i = 0; i < total; i++) {
+                    var offset;
+                    if(i < newIndex) {
+                      offset = pageHeight * (i + total - newIndex);
+                      console.log(i+': '+offset)
+                      that.translate(i, offset, 0, 0, function(animation) {
+                        that.page.setData({
+                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
+                        })
+                      });
+                    }
+                    if(i > newIndex && newIndex == 0) {
+                      offset = pageHeight * (i - newIndex);
+                      console.log(i+': '+offset)
+                      that.translate(i, offset, 0, 0, function(animation) {
+                        that.page.setData({
+                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
+                        })
+                      })
+                    }
+                    // if(scrollWhenOne && total == 1 && i == newIndex) {
+                    //   console.log(i+': '+0)
+                    //   that.translate(i, pageHeight, 0, 0, function(animation) {
+                    //     that.page.setData({
+                    //       [`$wux.barrage.${id}.animationData[${i}]`]: animation
+                    //     }, function() {
+                    //       that.translate(i, 0, 1, speed/3, function(animation) {
+                    //         that.page.setData({
+                    //           [`$wux.barrage.${id}.animationData[${i}]`]: animation
+                    //         })
+                    //       })
+                    //     })
+                    //   })
+                    // }
+                  }
+                }, speed+10);
+              }
             })
           }, 10);
         },
@@ -159,7 +173,6 @@ export default {
           var total = barrage.comments.length;
           var defaultIndex = barrage.defaultIndex;
           var animationData = [];
-          var translateYArr = [];
           var pageHeight = barrage.height;
           console.log('pageHeight: '+pageHeight);
 
@@ -168,20 +181,17 @@ export default {
             [`$wux.barrage.${id}.index`]: defaultIndex
           })
 
+          // items初始位置
           for (var i = 0; i < total; i++) {
-            animationData.push('');
-
-            // TODO items初始位置
             var offset = pageHeight * (i - defaultIndex);
             var display = i === defaultIndex ? 1 : 0;
-            this.translate(i, offset, display);
-
-            translateYArr.push(offset)
+            this.translate(i, offset, display, 0, function(animation) {
+              animationData.push(animation);
+            });
           }
 
           this.page.setData({
-            [`$wux.barrage.${id}.animationData`]: animationData,
-            [`$wux.barrage.${id}.translateYArr`]: translateYArr
+            [`$wux.barrage.${id}.animationData`]: animationData
           })
         },
         initTimer() {
@@ -192,12 +202,10 @@ export default {
           if (auto > 0 && !barrage.timer) {
 
             var interval = setInterval(() => {
-              if (!barrage.continuous && (barrage.index >= total - 1)) {
+              if (barrage.index > total - 1) {
                 return this.clearTimer();
               }
-              if (!barrage.dragging && !barrage.animating) {
-                this.next();
-              }
+              this.next();
             }, auto);
 
             this.page.setData({

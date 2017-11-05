@@ -16,26 +16,9 @@ view {
 }
 .barrage-swipe-item {
   position: absolute;
-  /* display: none; */
   width: 100%;
   height: 100%;
 }
-.barrage-swipe-item.is-active {
-  /* display: block;
-  transform: none; */
-}
-
-/* animation */
-@keyframes swipeItemFadeIn {
-  0% { opacity: 0; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
-} 
-@keyframes swipeItemFadeOut {
-  0% { opacity: 1; }
-  80% { opacity: 0; }
-  100% { opacity: 0;  }
-} 
 
 /* barrage style */
 .vertical-center {
