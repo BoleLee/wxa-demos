@@ -6,7 +6,7 @@ export default {
    */
   setDefaults() {
     return {
-      comments: [],
+      total: 3,
       animationData: [],
       auto: 2000, 
       speed: 1000, 
@@ -51,10 +51,10 @@ export default {
         doAnimate(towards) {
           var barrage = this.getComponentData();
           var prevIndex, nextIndex;
-          var pageHeight = barrage.height;
+          var pageHeight = barrage.height || 48;
           var speed = barrage.speed || 300;
           var circular = barrage.circular;
-          var total = barrage.comments.length;
+          var total = barrage.total;
           var currentIndex = barrage.index;
           var scrollWhenOne = barrage.scrollWhenOne;
           var that = this;
@@ -157,20 +157,10 @@ export default {
           this.doAnimate('next');
           console.log('doAnimate next')
         },
-        getRect: function(cb){
-          var that = this;
-          wx.createSelectorQuery().select('.barrage-swipe').boundingClientRect(function(rect){
-            that.page.setData({
-              [`$wux.barrage.${id}.height`]: rect.height
-            })
-            console.log(rect)
-            typeof cb == 'function' && cb()
-          }).exec()
-        },
         initDatas() {
           console.log('initing datas');
           var barrage = this.getComponentData();
-          var total = barrage.comments.length;
+          var total = barrage.total;
           var defaultIndex = barrage.defaultIndex;
           var animationData = [];
           var pageHeight = barrage.height;
@@ -197,7 +187,7 @@ export default {
         initTimer() {
           console.log('initing timer');
           var barrage = this.getComponentData();
-          var total = barrage.comments.length;
+          var total = barrage.total;
           var auto = barrage.auto;
           if (auto > 0 && !barrage.timer) {
 
@@ -238,9 +228,12 @@ export default {
     })
 
     console.log(component)
-    component.getRect(function() {
-      component.initDatas();
-      component.initTimer();
-    });
+    component.initDatas();
+    component.initTimer();
+  },
+
+  remove(id) {
+    // TODO remove component
+
   }
 }

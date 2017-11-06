@@ -49,11 +49,23 @@ Page({
   },
   onLoad() {
     var that = this;
+    var rpxRatio;
+
+    wx.getSystemInfo({  
+      success: function( res ) {  
+        rpxRatio = 750/res.clientWidth;
+      }
+    });
+
+    var height = Math.round(96/rpxRatio);
+
     $wuxBarrage.init('test1', {
-      comments: that.data.comments
+      height: height,
+      total: that.data.comments.length
     })
     $wuxBarrage.init('test2', {
-      comments: that.data.oneComment,
+      height: height,
+      total: that.data.oneComment.length,
       scrollWhenOne: true
     })
 
@@ -61,11 +73,12 @@ Page({
     swipeArr.forEach(function(item, index) {
       var name = `swipe-${index}`;
       $wuxBarrage.init(name, {
-        comments: item.comments
+        height: height,
+        total: item.comments.length
       })
     })
   },
   onUnload() {
-    $wuxBarrage.unload();
+    // TODO 清除定时器
   }
 })
