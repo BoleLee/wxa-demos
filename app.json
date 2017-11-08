@@ -1,26 +1,10 @@
 {
   "pages":[
-    "pages/demos/index/index",
-    "pages/demos/scrollable-tab-view/scrollable-tab-view",
-    "pages/demos/sort/sort",
-    "pages/demos/barrage/barrage",
-
     "pages/index/index",
-    "pages/logs/logs"
-
+    "pages/scrollable-tab-view/scrollable-tab-view",
+    "pages/sort/sort",
+    "pages/barrage/barrage"
   ],
-  "tabBar": {
-    "color": "#888888",
-    "selectedColor": "#43e474",
-    "backgroundColor": "#ffffff",
-    "list": [{
-      "pagePath": "pages/demos/index/index",
-      "text": "Demos"
-    }, {
-      "pagePath": "pages/index/index",
-      "text": "Me"
-    }]
-  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",

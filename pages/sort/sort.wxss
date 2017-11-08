@@ -1,4 +1,4 @@
-@import "../../../styles/bottom-btn-area.wxss";
+@import "../../styles/bottom-btn-area.wxss";
 
 
 /* 
@@ -35,6 +35,10 @@
   margin:0;
   height:32px;
   line-height:32px;
+  max-width: 600rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .none {
   display: none;

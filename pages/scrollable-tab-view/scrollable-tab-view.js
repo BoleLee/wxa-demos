@@ -46,7 +46,7 @@ Page({
         success: function( res ) {  
           var clientHeight = res.windowHeight,
               clientWidth = res.windowWidth,
-              rpxRatio = 750/clientWidth;
+              rpxRatio = res.pixelRatio;
           var swiperHeight = (clientHeight*rpxRatio-navHeight)/rpxRatio;
 
           that.setData( {
