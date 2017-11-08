@@ -116,7 +116,7 @@ export default {
                     var offset;
                     if(i < newIndex) {
                       offset = pageHeight * (i + total - newIndex);
-                      console.log(i+': '+offset)
+                      // console.log(i+': '+offset)
                       that.translate(i, offset, 0, 0, function(animation) {
                         that.page.setData({
                           [`$wux.barrage.${id}.animationData[${i}]`]: animation
@@ -125,7 +125,7 @@ export default {
                     }
                     if(i > newIndex && newIndex == 0) {
                       offset = pageHeight * (i - newIndex);
-                      console.log(i+': '+offset)
+                      // console.log(i+': '+offset)
                       that.translate(i, offset, 0, 0, function(animation) {
                         that.page.setData({
                           [`$wux.barrage.${id}.animationData[${i}]`]: animation
@@ -212,7 +212,8 @@ export default {
           })
         },
 
-        unload() {
+        onUnload() {
+          console.log('component onUnload')
           var barrage = this.getComponentData();
           if (barrage.timer) {
             this.clearTimer();

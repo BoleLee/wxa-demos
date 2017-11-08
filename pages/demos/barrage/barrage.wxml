@@ -1,3 +1,5 @@
+<navigator url="../sort/sort">sort</navigator>
+
 <view class="weui-cells__title">default</view>
 <view class="container">
   <view class="barrage-area">

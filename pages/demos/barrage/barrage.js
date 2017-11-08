@@ -47,13 +47,29 @@ Page({
       }]
     }]
   },
+
+  barrageClearTimer: function() {
+    var that = this;
+    var { $wux } = this.data;
+    if($wux.barrage) {
+      for(var item in $wux.barrage) {
+        if($wux.barrage[item].timer) {
+          clearInterval($wux.barrage[item].timer);
+          that.setData({
+            [`$wux.barrage.${item}.timer`]: null
+          })
+        }
+      }
+    }
+  },
   onLoad() {
+    console.log('onLoad')
     var that = this;
     var rpxRatio;
 
     wx.getSystemInfo({  
       success: function( res ) {  
-        rpxRatio = 750/res.clientWidth;
+        rpxRatio = res.pixelRatio;
       }
     });
 
@@ -79,6 +95,17 @@ Page({
     })
   },
   onUnload() {
-    // TODO 清除定时器
+    console.log('onUnload')
+    // 清除定时器
+    this.barrageClearTimer()
+  },
+  onHide() {
+    console.log('onHide')
+    // 清除定时器
+    // this.barrageClearTimer()
+  },
+  onShow() {
+    console.log('onShow')
+    // 重启定时器
   }
 })
