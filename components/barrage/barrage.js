@@ -6,14 +6,15 @@ export default {
    */
   setDefaults() {
     return {
+      height: 48,
       total: 3,
+      showCount: 1,
       animationData: [],
       auto: 2000, 
       speed: 1000, 
       circular: true,
       scrollWhenOne: false,
       ready: false,
-      height: 48,
       defaultIndex: 0,
       index: 0,
       timer: null,
@@ -30,7 +31,7 @@ export default {
       scope: `$wux.barrage.${id}`,
       data: options,
       methods: {
-        translate(index, offset, display, speed, callback) {
+        translate(offset, display, speed, callback) {
           if (speed >= 0) {
             /**
              * 创建一个动画实例
@@ -57,13 +58,14 @@ export default {
           var total = barrage.total;
           var currentIndex = barrage.index;
           var scrollWhenOne = barrage.scrollWhenOne;
+          var showCount = barrage.showCount;
           var that = this;
 
           if (total === 0) return;
           
           if (towards === 'next') {
             prevIndex = currentIndex - 1;
-            nextIndex = currentIndex + 1;
+            nextIndex = currentIndex + showCount;
             if (prevIndex < 0) {
               prevIndex = total - 1;
             }
@@ -93,15 +95,30 @@ export default {
             var animationData = [];
             for(var i = 0; i < total; i++) {
               var offset = pageHeight * (i - newIndex);
-              var display = i === newIndex ? 1 : 0;
-              if(circular && newIndex == 0 && i > newIndex) {
-                offset = pageHeight * (i - total - newIndex);
+              var display = 0;
+              if(newIndex <= i && i < newIndex + showCount) {
+                display = 1;
               }
-              // if(scrollWhenOne && total == 1 && i == newIndex) {
-              //   offset = pageHeight * -1;
-              //   speed = speed / 3;
-              // }
-              this.translate(i, offset, display, speed, function(animation) {
+              // 二次循环过渡时(index=0出现在可见范围内)，让往上滚动
+              if(circular) {
+                // 最后一个进入可视区域，且在可视区域期间
+                if(total - newIndex <= showCount && i + total - newIndex < showCount) {
+                  offset = pageHeight * (i + total - newIndex);
+                  display = 1;
+                }
+                // 最后一个离开可视区域
+                if(newIndex == 0 && i == total - 1) {
+                  offset = pageHeight * (i - total - newIndex);
+                }
+                if(newIndex == 0 && i > 0 && i < total - 1) {
+                  offset = pageHeight * (i - newIndex);
+                  display = i < showCount ? 1 : 0;
+                }
+                // 当 total < showCount 时，使其有滚动效果
+                // if(total <= showCount) {
+                // }
+              }
+              this.translate(offset, display, speed, function(animation) {
                 animationData.push(animation);
               });
             }
@@ -114,39 +131,37 @@ export default {
                 setTimeout(() => {
                   for(var i = 0; i < total; i++) {
                     var offset;
-                    if(i < newIndex) {
+                    var display = 0;
+                    // 最后一个进入可视区域，且在可视区域期间
+                    if(total - newIndex <= showCount && i < newIndex) {
                       offset = pageHeight * (i + total - newIndex);
-                      // console.log(i+': '+offset)
-                      that.translate(i, offset, 0, 0, function(animation) {
+                      display = i + total - newIndex < showCount ? 1 : 0;
+                      that.translate(offset, display, 0, function(animation) {
                         that.page.setData({
                           [`$wux.barrage.${id}.animationData[${i}]`]: animation
                         })
                       });
                     }
-                    if(i > newIndex && newIndex == 0) {
+                    // 最后一个离开可视区域
+                    if(newIndex == 0 && i == total - 1) {
                       offset = pageHeight * (i - newIndex);
-                      // console.log(i+': '+offset)
-                      that.translate(i, offset, 0, 0, function(animation) {
+                      that.translate(offset, display, 0, function(animation) {
                         that.page.setData({
                           [`$wux.barrage.${id}.animationData[${i}]`]: animation
                         })
-                      })
+                      });
                     }
-                    // if(scrollWhenOne && total == 1 && i == newIndex) {
-                    //   console.log(i+': '+0)
-                    //   that.translate(i, pageHeight, 0, 0, function(animation) {
-                    //     that.page.setData({
-                    //       [`$wux.barrage.${id}.animationData[${i}]`]: animation
-                    //     }, function() {
-                    //       that.translate(i, 0, 1, speed/3, function(animation) {
-                    //         that.page.setData({
-                    //           [`$wux.barrage.${id}.animationData[${i}]`]: animation
-                    //         })
-                    //       })
-                    //     })
-                    //   })
-                    // }
+                    // 当 total < showCount 时，使其有滚动效果
+                    if(total <= showCount) {
+                      offset = pageHeight * (i - newIndex);
+                      that.translate(offset, 1, 300, function(animation) {
+                        that.page.setData({
+                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
+                        })
+                      });
+                    }
                   }
+
                 }, speed+10);
               }
             })
@@ -164,6 +179,7 @@ export default {
           var defaultIndex = barrage.defaultIndex;
           var animationData = [];
           var pageHeight = barrage.height;
+          var showCount = barrage.showCount;
           console.log('pageHeight: '+pageHeight);
 
           this.page.setData({
@@ -174,8 +190,11 @@ export default {
           // items初始位置
           for (var i = 0; i < total; i++) {
             var offset = pageHeight * (i - defaultIndex);
-            var display = i === defaultIndex ? 1 : 0;
-            this.translate(i, offset, display, 0, function(animation) {
+            var display = 0;
+            if(defaultIndex <= i && i < defaultIndex + showCount) {
+              display = 1;
+            }
+            this.translate(offset, display, 0, function(animation) {
               animationData.push(animation);
             });
           }

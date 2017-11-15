@@ -1,6 +1,8 @@
-<view class="weui-cells__title">default</view>
+<navigator url="../sort/sort">navigateTo other page</navigator>
+
+<view class="weui-cells__title"> "showCount: 2, showCount 小于 total" </view>
 <view class="container">
-  <view class="barrage-area">
+  <view class="barrage-area barrage-area-two">
     <view class="barrage-swipe">
       <view class="barrage-swipe-items-wrap">
         <block wx:for="{{comments}}" wx:key="id" wx:for-item="comment">
@@ -25,6 +27,26 @@
       <view class="barrage-swipe-items-wrap">
         <block wx:for="{{oneComment}}" wx:key="id" wx:for-item="comment">
           <view class="barrage-swipe-item {{ index === $wux.barrage.test2.index ? 'is-active' : '' }}" animation="{{ $wux.barrage.test2.animationData[index] }}">
+            <view class="vertical-center">
+              <view class="barrage-item-wrapper">
+                <image src="{{comment.avatar_url}}" class="avatar"></image>
+                <view class="barrage-content">{{ comment.content }}</view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="weui-cells__title"> total = showCount </view>
+<view class="container">
+  <view class="barrage-area barrage-area-two">
+    <view class="barrage-swipe">
+      <view class="barrage-swipe-items-wrap">
+        <block wx:for="{{comments2}}" wx:key="id" wx:for-item="comment">
+          <view class="barrage-swipe-item {{ index === $wux.barrage.test3.index ? 'is-active' : '' }}" animation="{{ $wux.barrage.test3.animationData[index] }}">
             <view class="vertical-center">
               <view class="barrage-item-wrapper">
                 <image src="{{comment.avatar_url}}" class="avatar"></image>

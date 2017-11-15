@@ -13,3 +13,7 @@
   height: 96rpx;
   overflow: hidden;
 }
+.barrage-area-two {
+  top: 100rpx;
+  height: 288rpx;
+}

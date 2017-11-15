@@ -3,7 +3,8 @@
     "pages/index/index",
     "pages/scrollable-tab-view/scrollable-tab-view",
     "pages/sort/sort",
-    "pages/barrage/barrage"
+    "pages/barrage/barrage",
+    "pages/test/test"
   ],
   "window":{
     "backgroundTextStyle":"light",
