@@ -101,22 +101,27 @@ export default {
               }
               // 二次循环过渡时(index=0出现在可见范围内)，让往上滚动
               if(circular) {
-                // 最后一个进入可视区域，且在可视区域期间
-                if(total - newIndex <= showCount && i + total - newIndex < showCount) {
-                  offset = pageHeight * (i + total - newIndex);
-                  display = 1;
+                if(total > showCount) {
+                  // 最后一个进入可视区域，且在可视区域期间
+                  if(total - newIndex <= showCount && i + total - newIndex < showCount) {
+                    offset = pageHeight * (i + total - newIndex);
+                    display = 1;
+                  }
+                  // 最后一个离开可视区域
+                  if(newIndex == 0 && i == total - 1) {
+                    offset = pageHeight * (i - total - newIndex);
+                  }
+                  if(newIndex == 0 && i > 0 && i < total - 1) {
+                    offset = pageHeight * (i - newIndex);
+                    display = i < showCount ? 1 : 0;
+                  }
                 }
-                // 最后一个离开可视区域
-                if(newIndex == 0 && i == total - 1) {
-                  offset = pageHeight * (i - total - newIndex);
+                
+                // 当 total <= showCount 时，使其有滚动效果
+                if(total <= showCount) {
+                  offset = pageHeight * (i - 1);
+                  speed = 500; 
                 }
-                if(newIndex == 0 && i > 0 && i < total - 1) {
-                  offset = pageHeight * (i - newIndex);
-                  display = i < showCount ? 1 : 0;
-                }
-                // 当 total < showCount 时，使其有滚动效果
-                // if(total <= showCount) {
-                // }
               }
               this.translate(offset, display, speed, function(animation) {
                 animationData.push(animation);
@@ -126,41 +131,61 @@ export default {
             this.page.setData({
               [`$wux.barrage.${id}.animationData`]: animationData
             }, function() {
-
+              
               if(circular && towards == 'next') {
                 setTimeout(() => {
+                  // 复位：回到其下一次即将出现的地方之下
                   for(var i = 0; i < total; i++) {
                     var offset;
                     var display = 0;
-                    // 最后一个进入可视区域，且在可视区域期间
-                    if(total - newIndex <= showCount && i < newIndex) {
-                      offset = pageHeight * (i + total - newIndex);
-                      display = i + total - newIndex < showCount ? 1 : 0;
-                      that.translate(offset, display, 0, function(animation) {
-                        that.page.setData({
-                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
-                        })
-                      });
+
+                    if(total > showCount) {
+                      // 最后一个进入可视区域，且在可视区域期间
+                      if(total - newIndex <= showCount && i < newIndex) {
+                        offset = pageHeight * (i + total - newIndex);
+                        display = i + total - newIndex < showCount ? 1 : 0;
+                        that.translate(offset, display, 0, function(animation) {
+                          animationData[i] = animation;
+                        });
+                      }
+                      // 最后一个离开可视区域
+                      if(newIndex == 0 && i == total - 1) {
+                        offset = pageHeight * (i - newIndex);
+                        that.translate(offset, display, 0, function(animation) {
+                          animationData[i] = animation;
+                        });
+                      }
                     }
-                    // 最后一个离开可视区域
-                    if(newIndex == 0 && i == total - 1) {
-                      offset = pageHeight * (i - newIndex);
-                      that.translate(offset, display, 0, function(animation) {
-                        that.page.setData({
-                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
-                        })
-                      });
-                    }
-                    // 当 total < showCount 时，使其有滚动效果
+                    
+                    // 当 total <= showCount 
                     if(total <= showCount) {
-                      offset = pageHeight * (i - newIndex);
-                      that.translate(offset, 1, 300, function(animation) {
-                        that.page.setData({
-                          [`$wux.barrage.${id}.animationData[${i}]`]: animation
-                        })
+                      offset = pageHeight * (i + 1); 
+                      that.translate(offset, 0, 0, function(animation) {
+                        animationData[i] = animation;
                       });
                     }
                   }
+
+                  that.page.setData({
+                    [`$wux.barrage.${id}.animationData`]: animationData
+                  }, function() {
+
+                    if(total <= showCount) { 
+                      // 当 total <= showCount 时，使其滚动复位
+                      setTimeout(() => {
+                        for(var i = 0; i < total; i++) {
+                          offset = pageHeight * i;
+                          that.translate(offset, 1, 500, function(animation) {
+                            animationData[i] = animation;
+                          })
+                        }
+
+                        that.page.setData({
+                          [`$wux.barrage.${id}.animationData`]: animationData
+                        })
+                      }, 10) 
+                    }
+                  })
 
                 }, speed+10);
               }
