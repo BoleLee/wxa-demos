@@ -1,0 +1,65 @@
+
+<view class="weui-cells__title">bindinput, bindconfirm</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">输入</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input bindinput="inputChange1" bindconfirm="inputChange1" class="weui-input" placeholder="请输入" />
+      </view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__hd">你输入了：</view>
+        <view class="weui-cell__bd">{{ inputValue1 }}</view>
+    </view>
+</view>
+
+
+<view class="weui-cells__title">bindinput</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">输入</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input bindinput="inputChange2" class="weui-input" placeholder="请输入" />
+      </view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__hd">你输入了：</view>
+        <view class="weui-cell__bd">{{ inputValue2 }}</view>
+    </view>
+</view>
+
+<view class="weui-cells__title">bindblur</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">输入</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input bindblur="inputChange3" class="weui-input" placeholder="请输入" />
+      </view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__hd">你输入了：</view>
+        <view class="weui-cell__bd">{{ inputValue3 }}</view>
+    </view>
+</view>
+
+<view class="weui-cells__title">bindconfirm</view>
+<view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">输入</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input bindconfirm="inputChange4" class="weui-input" placeholder="请输入" />
+      </view>
+    </view>
+    <view class="weui-cell">
+        <view class="weui-cell__hd">你输入了：</view>
+        <view class="weui-cell__bd">{{ inputValue4 }}</view>
+    </view>
+</view>

@@ -1,10 +1,11 @@
 {
   "pages":[
+    "pages/input-method/input-method",
     "pages/index/index",
     "pages/scrollable-tab-view/scrollable-tab-view",
     "pages/sort/sort",
     "pages/barrage/barrage",
-    "pages/test/test"
+    "pages/marquee/marquee"
   ],
   "window":{
     "backgroundTextStyle":"light",
