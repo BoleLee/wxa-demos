@@ -9,6 +9,9 @@ Page({
     }, {
       url: '../barrage/barrage',
       name: 'barrage'
+    }, {
+      url: '../barrage-origin/barrage',
+      name: 'barrage-origin'
     }]
   }
 })

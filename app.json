@@ -1,16 +1,14 @@
 {
-  "pages":[
-    "pages/barrage-origin/barrage",
-
-    "pages/we-cropper/index/index",
-    "pages/we-cropper/upload/upload",
-    
+  "pages":[  
     "pages/index/index",
     "pages/scrollable-tab-view/scrollable-tab-view",
     "pages/sort/sort",
     "pages/barrage/barrage",
     "pages/marquee/marquee",
-    "pages/input-method/input-method"
+    "pages/input-method/input-method",
+    "pages/we-cropper/index/index",
+    "pages/we-cropper/upload/upload",
+    "pages/barrage-origin/barrage"
   ],
   "window":{
     "backgroundTextStyle":"light",
