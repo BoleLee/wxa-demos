@@ -1,0 +1,6 @@
+<view class="container">
+  <view class="card">
+    <image src="{{src}}" class="image" bindtap="upload" bindload="imageLoad"></image>
+    <view bindtap="upload" class="upload-btn">更换图片</view>
+  </view>
+</view>

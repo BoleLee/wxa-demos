@@ -1,0 +1,11 @@
+<view class="barrage-container">
+  <view>单个组件，不使用循环</view>
+  <barrage-origin comments="{{ comments }}" total="{{ comments.length }}"></barrage-origin>
+</view>
+
+<block wx:for="{{datas}}" wx:key="index">
+  <view class="barrage-container">
+    <view>{{ item.title }}</view>
+    <barrage-origin comments="{{ item.comments }}" total="{{ item.comments.length }}"></barrage-origin>
+  </view>
+</block>

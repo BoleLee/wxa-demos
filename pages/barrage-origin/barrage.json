@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "原生自定义组件",
+  "usingComponents": {
+    "barrage-origin": "../../components/barrage-origin/barrage"
+  }
+}

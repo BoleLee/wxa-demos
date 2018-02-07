@@ -1,3 +1,8 @@
+/**
+ * we-cropper v1.1.5
+ * (c) 2017 dlhandsome
+ * @license MIT
+ */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
 	typeof define === 'function' && define.amd ? define(factory) :
@@ -11,13 +16,12 @@ var device = void 0;
 var TOUCH_STATE = ['touchstarted', 'touchmoved', 'touchended'];
 
 function firstLetterUpper(str) {
-	return str.charAt(0).toUpperCase() + str.slice(1);
+	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 function setTouchState(instance) {
-	for (var _len = arguments.length, arg = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-		arg[_key - 1] = arguments[_key];
-	}
+	var arg = [], len = arguments.length - 1;
+	while ( len-- > 0 ) arg[ len ] = arguments[ len + 1 ];
 
 	TOUCH_STATE.forEach(function (key, i) {
 		if (arg[i] !== undefined) {
@@ -30,239 +34,148 @@ function validator(instance, o) {
 	Object.defineProperties(instance, o);
 }
 
-function getDevice() {
+function	getDevice() {
 	if (!device) {
 		device = wx.getSystemInfoSync();
 	}
-	return device;
+	return device
 }
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-
-
-
-
-
-
-
-
-
-
-var classCallCheck = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-var createClass = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var slicedToArray = function () {
-  function sliceIterator(arr, i) {
-    var _arr = [];
-    var _n = true;
-    var _d = false;
-    var _e = undefined;
-
-    try {
-      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-        _arr.push(_s.value);
-
-        if (i && _arr.length === i) break;
-      }
-    } catch (err) {
-      _d = true;
-      _e = err;
-    } finally {
-      try {
-        if (!_n && _i["return"]) _i["return"]();
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-
-    return _arr;
-  }
-
-  return function (arr, i) {
-    if (Array.isArray(arr)) {
-      return arr;
-    } else if (Symbol.iterator in Object(arr)) {
-      return sliceIterator(arr, i);
-    } else {
-      throw new TypeError("Invalid attempt to destructure non-iterable instance");
-    }
-  };
-}();
+function isFunction (obj) {
+	return typeof obj === 'function'
+}
 
 var tmp = {};
 
 var DEFAULT = {
 	id: {
 		default: 'cropper',
-		get: function get$$1() {
-			return tmp.id;
+		get: function get () {
+			return tmp.id
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'string') {
-				console.error('id\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'string') {
+				console.error(("id：" + value + " is invalid"));
 			}
 			tmp.id = value;
 		}
 	},
 	width: {
 		default: 750,
-		get: function get$$1() {
-			return tmp.width;
+		get: function get () {
+			return tmp.width
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'number') {
-				console.error('width\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'number') {
+				console.error(("width：" + value + " is invalid"));
 			}
 			tmp.width = value;
 		}
 	},
 	height: {
 		default: 750,
-		get: function get$$1() {
-			return tmp.height;
+		get: function get () {
+			return tmp.height
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'number') {
-				console.error('height\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'number') {
+				console.error(("height：" + value + " is invalid"));
 			}
 			tmp.height = value;
 		}
 	},
 	scale: {
 		default: 2.5,
-		get: function get$$1() {
-			return tmp.scale;
+		get: function get () {
+			return tmp.scale
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'number') {
-				console.error('scale\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'number') {
+				console.error(("scale：" + value + " is invalid"));
 			}
 			tmp.scale = value;
 		}
 	},
 	zoom: {
 		default: 5,
-		get: function get$$1() {
-			return tmp.zoom;
+		get: function get () {
+			return tmp.zoom
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'number') {
-				console.error('zoom\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'number') {
+				console.error(("zoom：" + value + " is invalid"));
 			} else if (value < 0 || value > 10) {
-				console.error('zoom should be ranged in 0 ~ 10');
+				console.error("zoom should be ranged in 0 ~ 10");
 			}
 			tmp.zoom = value;
 		}
 	},
 	src: {
 		default: 'cropper',
-		get: function get$$1() {
-			return tmp.src;
+		get: function get () {
+			return tmp.src
 		},
-		set: function set$$1(value) {
-			if (typeof value !== 'string') {
-				console.error('id\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'string') {
+				console.error(("id：" + value + " is invalid"));
 			}
 			tmp.src = value;
 		}
 	},
 	cut: {
 		default: {},
-		get: function get$$1() {
-			return tmp.cut;
+		get: function get () {
+			return tmp.cut
 		},
-		set: function set$$1(value) {
-			if ((typeof value === 'undefined' ? 'undefined' : _typeof(value)) !== 'object') {
-				console.error('id\uFF1A' + value + ' is invalid');
+		set: function set (value) {
+			if (typeof(value) !== 'object') {
+				console.error(("id：" + value + " is invalid"));
 			}
 			tmp.cut = value;
 		}
 	},
+	destScale: {
+		default: 3,
+		get: function get() {
+			return tmp.destScale
+		},
+		set: function set(value) {
+			tmp.destScale = value;
+		}
+	},
 	onReady: {
 		default: null,
-		get: function get$$1() {
-			return tmp.ready;
+		get: function get () {
+			return tmp.ready
 		},
-		set: function set$$1(value) {
+		set: function set (value) {
 			tmp.ready = value;
 		}
 	},
 	onBeforeImageLoad: {
 		default: null,
-		get: function get$$1() {
-			return tmp.beforeImageLoad;
+		get: function get () {
+			return tmp.beforeImageLoad
 		},
-		set: function set$$1(value) {
+		set: function set (value) {
 			tmp.beforeImageLoad = value;
 		}
 	},
 	onImageLoad: {
 		default: null,
-		get: function get$$1() {
-			return tmp.imageLoad;
+		get: function get () {
+			return tmp.imageLoad
 		},
-		set: function set$$1(value) {
+		set: function set (value) {
 			tmp.imageLoad = value;
 		}
 	},
 	onBeforeDraw: {
 		default: null,
-		get: function get$$1() {
-			return tmp.beforeDraw;
+		get: function get () {
+			return tmp.beforeDraw
 		},
-		set: function set$$1(value) {
+		set: function set (value) {
 			tmp.beforeDraw = value;
 		}
 	}
@@ -273,25 +186,23 @@ var DEFAULT = {
  */
 function prepare() {
 	var self = this;
-
-	var _getDevice = getDevice(),
-	    windowWidth = _getDevice.windowWidth;
+	var ref = getDevice();
+	var windowWidth = ref.windowWidth;
 
 	self.attachPage = function () {
-		var pages = getCurrentPages
+		var pages = getCurrentPages();
 		//  获取到当前page上下文
-		();var pageContext = pages[pages.length - 1];
+		var pageContext = pages[pages.length - 1];
 		//  把this依附在Page上下文的wecropper属性上，便于在page钩子函数中访问
 		pageContext.wecropper = self;
 	};
 
 	self.createCtx = function () {
 		var id = self.id;
-
 		if (id) {
 			self.ctx = wx.createCanvasContext(id);
 		} else {
-			console.error('constructor: create canvas context failed, \'id\' must be valuable');
+			console.error("constructor: create canvas context failed, 'id' must be valuable");
 		}
 	};
 
@@ -308,13 +219,15 @@ function observer() {
 
 	self.on = function (event, fn) {
 		if (EVENT_TYPE.indexOf(event) > -1) {
-			if (typeof fn === 'function') {
-				event === 'ready' ? fn(self) : self['on' + firstLetterUpper(event)] = fn;
+			if (typeof(fn) === 'function') {
+				event === 'ready'
+					? fn(self)
+					: self[("on" + (firstLetterUpper(event)))] = fn;
 			}
 		} else {
-			console.error('event: ' + event + ' is invalid');
+			console.error(("event: " + event + " is invalid"));
 		}
-		return self;
+		return self
 	};
 }
 
@@ -325,40 +238,35 @@ function methods() {
 	var self = this;
 
 	var deviceRadio = self.deviceRadio;
-
 	var boundWidth = self.width; // 裁剪框默认宽度，即整个画布宽度
 	var boundHeight = self.height; // 裁剪框默认高度，即整个画布高度
-	var _self$cut = self.cut,
-	    _self$cut$x = _self$cut.x,
-	    x = _self$cut$x === undefined ? 0 : _self$cut$x,
-	    _self$cut$y = _self$cut.y,
-	    y = _self$cut$y === undefined ? 0 : _self$cut$y,
-	    _self$cut$width = _self$cut.width,
-	    width = _self$cut$width === undefined ? boundWidth : _self$cut$width,
-	    _self$cut$height = _self$cut.height,
-	    height = _self$cut$height === undefined ? boundHeight : _self$cut$height;
-
+	var destScale = self.destScale; // 输出图片为裁剪框的倍数
+	var ref = self.cut;
+	var x = ref.x; if ( x === void 0 ) x = 0;
+	var y = ref.y; if ( y === void 0 ) y = 0;
+	var width = ref.width; if ( width === void 0 ) width = boundWidth;
+	var height = ref.height; if ( height === void 0 ) height = boundHeight;
 
 	self.updateCanvas = function () {
 		if (self.croperTarget) {
 			//  画布绘制图片
 			self.ctx.drawImage(self.croperTarget, self.imgLeft, self.imgTop, self.scaleWidth, self.scaleHeight);
 		}
-		typeof self.onBeforeDraw === 'function' && self.onBeforeDraw(self.ctx, self);
+    isFunction(self.onBeforeDraw) && self.onBeforeDraw(self.ctx, self);
 
-		self.setBoundStyle //	设置边界样式
-		();self.ctx.draw();
-		return self;
+		self.setBoundStyle(); //	设置边界样式
+		self.ctx.draw();
+		return self
 	};
 
 	self.pushOrign = function (src) {
 		self.src = src;
-
-		typeof self.onBeforeImageLoad === 'function' && self.onBeforeImageLoad(self.ctx, self);
+    
+    isFunction(self.onBeforeImageLoad) && self.onBeforeImageLoad(self.ctx, self);
 
 		wx.getImageInfo({
 			src: src,
-			success: function success(res) {
+			success: function success (res) {
 				var innerAspectRadio = res.width / res.height;
 
 				self.croperTarget = res.path;
@@ -376,40 +284,39 @@ function methods() {
 					self.rectX = x - Math.abs((width - self.baseWidth) / 2);
 				}
 
+
 				self.imgLeft = self.rectX;
 				self.imgTop = self.rectY;
 				self.scaleWidth = self.baseWidth;
 				self.scaleHeight = self.baseHeight;
 
 				self.updateCanvas();
-
-				typeof self.onImageLoad === 'function' && self.onImageLoad(self.ctx, self);
+        
+        isFunction(self.onImageLoad) && self.onImageLoad(self.ctx, self);
 			}
 		});
 
 		self.update();
-		return self;
+		return self
 	};
 
 	self.getCropperImage = function () {
-		for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-			args[_key] = arguments[_key];
-		}
+		var args = [], len = arguments.length;
+		while ( len-- ) args[ len ] = arguments[ len ];
 
 		var id = self.id;
-
 		var ARG_TYPE = toString.call(args[0]);
+		var fn = args[args.length - 1];
 
 		switch (ARG_TYPE) {
 			case '[object Object]':
-				var _args$0$quality = args[0].quality,
-				    quality = _args$0$quality === undefined ? 10 : _args$0$quality;
+				var ref = args[0];
+		var quality = ref.quality; if ( quality === void 0 ) quality = 10;
 
-
-				if (typeof quality !== 'number') {
-					console.error('quality\uFF1A' + quality + ' is invalid');
+				if (typeof(quality) !== 'number') {
+					console.error(("quality：" + quality + " is invalid"));
 				} else if (quality < 0 || quality > 10) {
-					console.error('quality should be ranged in 0 ~ 10');
+					console.error("quality should be ranged in 0 ~ 10");
 				}
 				wx.canvasToTempFilePath({
 					canvasId: id,
@@ -419,10 +326,13 @@ function methods() {
 					height: height,
 					destWidth: width * quality / (deviceRadio * 10),
 					destHeight: height * quality / (deviceRadio * 10),
-					success: function success(res) {
-						typeof args[args.length - 1] === 'function' && args[args.length - 1](res.tempFilePath);
+					success: function success (res) {
+            isFunction(fn) && fn.call(self, res.tempFilePath);
+					},
+					fail: function fail (res) {
+            isFunction(fn) && fn.call(self, null);
 					}
-				});break;
+				}); break
 			case '[object Function]':
 				wx.canvasToTempFilePath({
 					canvasId: id,
@@ -430,15 +340,18 @@ function methods() {
 					y: y,
 					width: width,
 					height: height,
-					destWidth: width / deviceRadio,
-					destHeight: height / deviceRadio,
-					success: function success(res) {
-						typeof args[args.length - 1] === 'function' && args[args.length - 1](res.tempFilePath);
+					destWidth: width * destScale,                                                                                                                
+					destHeight: height * destScale,
+					success: function success (res) {
+            isFunction(fn) && fn.call(self, res.tempFilePath);
+					},
+					fail: function fail (res) {
+            isFunction(fn) && fn.call(self, null);
 					}
-				});break;
+				}); break
 		}
 
-		return self;
+		return self
 	};
 }
 
@@ -448,7 +361,7 @@ function methods() {
 function update() {
 	var self = this;
 
-	if (!self.src) return;
+	if (!self.src) { return }
 
 	self.__oneTouchStart = function (touch) {
 		self.touchX0 = touch.x;
@@ -456,11 +369,10 @@ function update() {
 	};
 
 	self.__oneTouchMove = function (touch) {
-		var xMove = void 0,
-		    yMove = void 0;
+		var xMove, yMove;
 		//计算单指移动的距离
 		if (self.touchended) {
-			return self.updateCanvas();
+			return self.updateCanvas()
 		}
 		xMove = touch.x - self.touchX0;
 		yMove = touch.y - self.touchY0;
@@ -474,9 +386,7 @@ function update() {
 	};
 
 	self.__twoTouchStart = function (touch0, touch1) {
-		var xMove = void 0,
-		    yMove = void 0,
-		    oldDistance = void 0;
+		var xMove, yMove, oldDistance;
 
 		self.touchX1 = self.rectX + self.scaleWidth / 2;
 		self.touchY1 = self.rectY + self.scaleHeight / 2;
@@ -490,19 +400,16 @@ function update() {
 	};
 
 	self.__twoTouchMove = function (touch0, touch1) {
-		var xMove = void 0,
-		    yMove = void 0,
-		    newDistance = void 0;
-		var scale = self.scale,
-		    zoom = self.zoom;
+		var xMove, yMove, newDistance;
+		var scale = self.scale;
+		var zoom = self.zoom;
 		// 计算二指最新距离
-
 		xMove = touch1.x - touch0.x;
 		yMove = touch1.y - touch0.y;
-		newDistance = Math.sqrt(xMove * xMove + yMove * yMove
+		newDistance = Math.sqrt(xMove * xMove + yMove * yMove);
 
 		//  使用0.005的缩放倍数具有良好的缩放体验
-		);self.newScale = self.oldScale + 0.001 * zoom * (newDistance - self.oldDistance);
+		self.newScale =  self.oldScale + 0.001 * zoom * (newDistance - self.oldDistance);
 
 		//  设定缩放范围
 		self.newScale <= 1 && (self.newScale = 1);
@@ -510,7 +417,7 @@ function update() {
 
 		self.scaleWidth = self.newScale * self.baseWidth;
 		self.scaleHeight = self.newScale * self.baseHeight;
-		var imgLeft = self.touchX1 - self.scaleWidth / 2;
+		var imgLeft =  self.touchX1 - self.scaleWidth / 2;
 		var imgTop = self.touchY1 - self.scaleHeight / 2;
 
 		self.outsideBound(imgLeft, imgTop);
@@ -531,37 +438,34 @@ function update() {
 
 var handle = {
 	//  图片手势初始监测
-	touchStart: function touchStart(e) {
+	touchStart: function touchStart (e) {
 		var self = this;
+		var ref = e.touches;
+		var touch0 = ref[0];
+		var touch1 = ref[1];
 
-		var _e$touches = slicedToArray(e.touches, 2),
-		    touch0 = _e$touches[0],
-		    touch1 = _e$touches[1];
-
-		setTouchState(self, true, null, null
+		setTouchState(self, true, null, null);
 
 		//计算第一个触摸点的位置，并参照改点进行缩放
-		);self.__oneTouchStart(touch0
+		self.__oneTouchStart(touch0);
 
 		// 两指手势触发
-		);if (e.touches.length >= 2) {
+		if (e.touches.length >= 2) {
 			self.__twoTouchStart(touch0, touch1);
 		}
 	},
 
-
 	//  图片手势动态缩放
-	touchMove: function touchMove(e) {
+	touchMove: function touchMove (e) {
 		var self = this;
+		var ref = e.touches;
+		var touch0 = ref[0];
+		var touch1 = ref[1];
 
-		var _e$touches2 = slicedToArray(e.touches, 2),
-		    touch0 = _e$touches2[0],
-		    touch1 = _e$touches2[1];
-
-		setTouchState(self, null, true
+		setTouchState(self, null, true);
 
 		// 单指手势时触发
-		);if (e.touches.length === 1) {
+		if (e.touches.length === 1) {
 			self.__oneTouchMove(touch0);
 		}
 		// 两指手势触发
@@ -569,7 +473,8 @@ var handle = {
 			self.__twoTouchMove(touch0, touch1);
 		}
 	},
-	touchEnd: function touchEnd(e) {
+
+	touchEnd: function touchEnd (e) {
 		var self = this;
 
 		setTouchState(self, false, false, true);
@@ -582,45 +487,44 @@ var handle = {
  */
 function cut() {
 	var self = this;
-	var deviceRadio = self.deviceRadio;
-
 	var boundWidth = self.width; // 裁剪框默认宽度，即整个画布宽度
 	var boundHeight = self.height;
 	// 裁剪框默认高度，即整个画布高度
-	var _self$cut = self.cut,
-	    _self$cut$x = _self$cut.x,
-	    x = _self$cut$x === undefined ? 0 : _self$cut$x,
-	    _self$cut$y = _self$cut.y,
-	    y = _self$cut$y === undefined ? 0 : _self$cut$y,
-	    _self$cut$width = _self$cut.width,
-	    width = _self$cut$width === undefined ? boundWidth : _self$cut$width,
-	    _self$cut$height = _self$cut.height,
-	    height = _self$cut$height === undefined ? boundHeight : _self$cut$height;
+	var ref = self.cut;
+	var x = ref.x; if ( x === void 0 ) x = 0;
+	var y = ref.y; if ( y === void 0 ) y = 0;
+	var width = ref.width; if ( width === void 0 ) width = boundWidth;
+	var height = ref.height; if ( height === void 0 ) height = boundHeight;
 
 	/**
-  * 设置边界
-  * @param imgLeft 图片左上角横坐标值
-  * @param imgTop 图片左上角纵坐标值
-  */
-
+	 * 设置边界
+	 * @param imgLeft 图片左上角横坐标值
+	 * @param imgTop 图片左上角纵坐标值
+	 */
 	self.outsideBound = function (imgLeft, imgTop) {
-		self.imgLeft = imgLeft >= x ? x : self.scaleWidth + imgLeft - x <= width ? x + width - self.scaleWidth : imgLeft;
+		self.imgLeft = imgLeft >= x
+			? x
+			: self.scaleWidth + imgLeft - x <= width
+			? x + width - self.scaleWidth
+			:	imgLeft;
 
-		self.imgTop = imgTop >= y ? y : self.scaleHeight + imgTop - y <= height ? y + height - self.scaleHeight : imgTop;
+		self.imgTop = imgTop >= y
+			? y
+			: self.scaleHeight + imgTop - y <= height
+			? y + height - self.scaleHeight
+			: imgTop;
 	};
 
 	/**
-  * 设置边界样式
-  * @param color	边界颜色
-  */
-	self.setBoundStyle = function () {
-		var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-		    _ref$color = _ref.color,
-		    color = _ref$color === undefined ? '#04b00f' : _ref$color,
-		    _ref$mask = _ref.mask,
-		    mask = _ref$mask === undefined ? 'rgba(0, 0, 0, 0.3)' : _ref$mask,
-		    _ref$lineWidth = _ref.lineWidth,
-		    lineWidth = _ref$lineWidth === undefined ? 1 : _ref$lineWidth;
+	 * 设置边界样式
+	 * @param color	边界颜色
+	 */
+	self.setBoundStyle = function (ref) {
+		if ( ref === void 0 ) ref = {};
+		var color = ref.color; if ( color === void 0 ) color = '#04b00f';
+		var mask = ref.mask; if ( mask === void 0 ) mask = 'rgba(0, 0, 0, 0.3)';
+		var lineWidth = ref.lineWidth; if ( lineWidth === void 0 ) lineWidth = 1;
+
 
 		// 绘制半透明层
 		self.ctx.beginPath();
@@ -629,41 +533,41 @@ function cut() {
 		self.ctx.fillRect(x, 0, width, y);
 		self.ctx.fillRect(x, y + height, width, boundHeight - y - height);
 		self.ctx.fillRect(x + width, 0, boundWidth - x - width, boundHeight);
-		self.ctx.fill
+		self.ctx.fill();
 
 		// 设置边界左上角样式
 		// 为使边界样式处于边界外边缘，此时x、y均要减少lineWidth
-		();self.ctx.beginPath();
+		self.ctx.beginPath();
 		self.ctx.setStrokeStyle(color);
 		self.ctx.setLineWidth(lineWidth);
 		self.ctx.moveTo(x - lineWidth, y + 10 - lineWidth);
 		self.ctx.lineTo(x - lineWidth, y - lineWidth);
 		self.ctx.lineTo(x + 10 - lineWidth, y - lineWidth);
-		self.ctx.stroke
+		self.ctx.stroke();
 
 		// 设置边界左下角样式
 		// 为使边界样式处于边界外边缘，此时x要减少lineWidth、y要增加lineWidth
-		();self.ctx.beginPath();
+		self.ctx.beginPath();
 		self.ctx.setStrokeStyle(color);
 		self.ctx.setLineWidth(lineWidth);
 		self.ctx.moveTo(x - lineWidth, y + height - 10 + lineWidth);
 		self.ctx.lineTo(x - lineWidth, y + height + lineWidth);
 		self.ctx.lineTo(x + 10 - lineWidth, y + height + lineWidth);
-		self.ctx.stroke
+		self.ctx.stroke();
 
 		// 设置边界右上角样式
 		// 为使边界样式处于边界外边缘，此时x要增加lineWidth、y要减少lineWidth
-		();self.ctx.beginPath();
+		self.ctx.beginPath();
 		self.ctx.setStrokeStyle(color);
 		self.ctx.setLineWidth(lineWidth);
 		self.ctx.moveTo(x + width - 10 + lineWidth, y - lineWidth);
 		self.ctx.lineTo(x + width + lineWidth, y - lineWidth);
 		self.ctx.lineTo(x + width + lineWidth, y + 10 - lineWidth);
-		self.ctx.stroke
+		self.ctx.stroke();
 
 		// 设置边界右下角样式
 		// 为使边界样式处于边界外边缘，此时x、y均要增加lineWidth
-		();self.ctx.beginPath();
+		self.ctx.beginPath();
 		self.ctx.setStrokeStyle(color);
 		self.ctx.setLineWidth(lineWidth);
 		self.ctx.moveTo(x + width + lineWidth, y + height - 10 + lineWidth);
@@ -673,58 +577,50 @@ function cut() {
 	};
 }
 
-var __version__ = '1.1.4';
+var version = "1.1.5";
 
-var weCropper = function () {
-	function weCropper(params) {
-		classCallCheck(this, weCropper);
+var weCropper = function weCropper (params) {
+	var self = this;
+	var _default = {};
 
-		var self = this;
-		var _default = {};
+	validator(self, DEFAULT);
 
-		validator(self, DEFAULT);
+	Object.keys(DEFAULT).forEach(function (key) {
+		_default[key] = DEFAULT[key].default;
+	});
+	Object.assign(self, _default, params);
 
-		Object.keys(DEFAULT).forEach(function (key) {
-			_default[key] = DEFAULT[key].default;
-		});
-		Object.assign(self, _default, params);
+	self.prepare();
+	self.attachPage();
+	self.createCtx();
+	self.observer();
+	self.cutt();
+	self.methods();
+	self.init();
+	self.update();
 
-		self.prepare();
-		self.attachPage();
-		self.createCtx();
-		self.observer();
-		self.cutt();
-		self.methods();
-		self.init();
-		self.update();
+	return self
+};
 
-		return self;
+
+weCropper.prototype.init = function init () {
+	var self = this;
+	var src = self.src;
+
+	self.version = version;
+
+	typeof self.onReady === 'function' && self.onReady(self.ctx, self);
+
+	if (src) {
+		self.pushOrign(src);
 	}
+	setTouchState(self, false, false, false);
 
-	createClass(weCropper, [{
-		key: 'init',
-		value: function init() {
-			var self = this;
-			var src = self.src;
+	self.oldScale = 1;
+	self.newScale = 1;
 
-
-			self.version = __version__;
-
-			typeof self.onReady === 'function' && self.onReady(self.ctx, self);
-
-			if (src) {
-				self.pushOrign(src);
-			}
-			setTouchState(self, false, false, false);
-
-			self.oldScale = 1;
-			self.newScale = 1;
-
-			return self;
-		}
-	}]);
-	return weCropper;
-}();
+	return self
+};
 
 Object.assign(weCropper.prototype, handle);
 

@@ -1,0 +1,16 @@
+<view class="barrage-area">
+  <view class="barrage-swipe">
+    <view class="barrage-swipe-items-wrap">
+      <block wx:for="{{comments}}" wx:key="comment.id" wx:for-item="comment">
+        <view class="barrage-swipe-item" animation="{{ animationData[index] }}">
+          <view class="vertical-center">
+            <view class="barrage-item-wrapper">
+              <image src="{{comment.avatarUrl}}" class="barrage-item-wrapper-avatar"></image>
+              <view class="barrage-item-wrapper-content">{{ comment.content }}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

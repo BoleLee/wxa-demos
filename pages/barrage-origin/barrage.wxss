@@ -1,0 +1,9 @@
+ view {
+  box-sizing: border-box;
+ }
+.barrage-container {
+  height: 200rpx;
+  background-color: #eee;
+  position: relative;
+  margin-bottom: 30rpx;
+}
